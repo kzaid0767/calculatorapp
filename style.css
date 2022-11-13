@@ -5,6 +5,11 @@ body{
     font-weight: 700;
 }
 
+h3{
+    color:hsl(0, 7%, 81%);
+    text-align: center;
+}
+
 .container{
     width: 24rem;
     margin: 0 auto;
@@ -68,12 +73,11 @@ button{
     display: flex;
     justify-content: center;
     align-items: center;
-   
 }
 .bottom-two-btns{
     width: 11rem;
     height: 2.5rem;
-    margin-top: 0;
+    margin-top: -0.5rem;
     font-family: 'League Spartan', sans-serif;
     font-weight: 700;
 }

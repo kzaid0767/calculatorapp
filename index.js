@@ -1,25 +1,37 @@
+
 document.addEventListener('click', handleClick)
 
 const operations=['+','-','x','/']
 const input = document.querySelector('#input')
 let tempInputOne = ''
 let tempArr = []
-let tempInputTwo = 0
+let toContinueArr=[]
+let tempInputTwo
 let tempInputThree = 0
 
 function handleClick(e){
     const clickedValue = e.target.value
-
-    if(operations.includes(clickedValue)){
-        handleOperation(clickedValue)
-    } else if(clickedValue==='reset'){
-        handleReset(clickedValue)
-    } else if(clickedValue==='del'){
-        handleDel(clickedValue)
-    } else if(clickedValue==='=') {
-        handleEqual()
-    } else handleConcat(clickedValue)
+    if(clickedValue){
+        if(operations.includes(clickedValue)){
+            
+            /*line below is for putting negative sign*/ 
+            if(!tempInputOne && clickedValue==='-'){ 
+                handleConcat(clickedValue)
+            } else{
+                handleOperation(clickedValue)
+            }
+        } else if(clickedValue==='reset'){
+            handleReset(clickedValue)
+        } else if(clickedValue==='del'){
+            handleDel(clickedValue)
+        } else if(clickedValue==='=') {
+            handleEqual()
+        } else handleConcat(clickedValue)
+    }
 }
+function furtherCalcuations(){
+}
+
 
 function handleConcat(val){
     if(val==='.'){
@@ -29,7 +41,6 @@ function handleConcat(val){
     } else{
         tempInputOne += val
     }
-    
     setScreenVal(tempInputOne)
 }
 
@@ -39,20 +50,35 @@ function handleOperation(val){
     tempArr.push(val)
 }
 
-function handleReset(val){
+function handleReset(){
     tempInputOne = ''
     input.value = ''
     tempArr=[]
-    tempInputThree=0
+
 }
 
-function handleDel(val){
+function handleDel(){
     tempInputOne = tempInputOne.substring(0, tempInputOne.length-1)
+    console.log(tempInputOne)
     setScreenVal(tempInputOne )
     
 }
 
+function setScreenVal(val){
+
+    if(!val){
+        input.value = 'Invalid inputs, try again'
+    } else {
+        input.value = val
+    }
+}
+
 function handleEqual(){
+
+    if(toContinueArr.length===2){
+        moreArithmetic(toContinueArr)
+    }
+
     tempArr.push(tempInputOne)
     if(tempArr[1]==='+'){
         tempInputTwo=parseFloat(tempArr[0])+parseFloat(tempArr[2])
@@ -74,9 +100,4 @@ function handleEqual(){
         handleReset()
         setScreenVal(tempInputTwo)
     }
-    
-}
-
-function setScreenVal(val){
-    input.value = val
 }
