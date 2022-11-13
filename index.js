@@ -59,13 +59,11 @@ function handleReset(){
 
 function handleDel(){
     tempInputOne = tempInputOne.substring(0, tempInputOne.length-1)
-    console.log(tempInputOne)
     setScreenVal(tempInputOne )
     
 }
 
 function setScreenVal(val){
-
     if(!val){
         input.value = 'Invalid inputs, try again'
     } else {
